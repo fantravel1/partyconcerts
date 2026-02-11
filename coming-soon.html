@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon — PartyConcerts</title>
+    <meta name="description" content="This page is coming soon to PartyConcerts.com. We're building the ultimate concert party culture platform — Party Index™ rankings, vibe-based discovery, crew builder, and afterparty maps.">
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎉</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --clr-bg: #0a0a0f;
+            --clr-surface: #131320;
+            --clr-accent: #ff3366;
+            --clr-accent-glow: rgba(255, 51, 102, 0.3);
+            --clr-purple: #8b5cf6;
+            --clr-cyan: #06b6d4;
+            --clr-text: #f0f0f5;
+            --clr-text-muted: #8888a0;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--clr-bg);
+            color: var(--clr-text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background */
+        .cs-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .cs-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            filter: blur(2px);
+        }
+
+        .cs-bg__overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(10, 10, 15, 0.5) 0%, rgba(10, 10, 15, 0.95) 70%);
+        }
+
+        /* Animated orbs */
+        .cs-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 0;
+            animation: orbFloat 8s ease-in-out infinite alternate;
+        }
+
+        .cs-orb--1 {
+            width: 300px; height: 300px;
+            background: var(--clr-accent);
+            top: 20%; left: 10%;
+            animation-delay: 0s;
+        }
+
+        .cs-orb--2 {
+            width: 250px; height: 250px;
+            background: var(--clr-purple);
+            bottom: 20%; right: 10%;
+            animation-delay: -3s;
+        }
+
+        .cs-orb--3 {
+            width: 200px; height: 200px;
+            background: var(--clr-cyan);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -5s;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        /* Content */
+        .cs-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+            max-width: 640px;
+            width: 100%;
+        }
+
+        .cs-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--clr-text);
+            margin-bottom: 2.5rem;
+        }
+
+        .cs-logo__icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--clr-accent);
+            border-radius: 10px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.875rem;
+            letter-spacing: -0.02em;
+        }
+
+        .cs-logo__text {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.02em;
+        }
+
+        .cs-badge {
+            display: inline-block;
+            padding: 0.375rem 1rem;
+            background: rgba(255, 51, 102, 0.12);
+            border: 1px solid rgba(255, 51, 102, 0.25);
+            border-radius: 100px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--clr-accent);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .cs-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .cs-title span {
+            background: linear-gradient(135deg, var(--clr-accent), var(--clr-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cs-desc {
+            font-size: 1.0625rem;
+            line-height: 1.65;
+            color: var(--clr-text-muted);
+            margin-bottom: 2rem;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cs-ref {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--clr-surface);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            font-size: 0.8125rem;
+            color: var(--clr-text-muted);
+            margin-bottom: 2rem;
+            font-family: var(--font-body);
+        }
+
+        /* Email form */
+        .cs-form {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 440px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cs-input {
+            flex: 1;
+            padding: 0.875rem 1.125rem;
+            background: var(--clr-surface);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: var(--clr-text);
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .cs-input:focus {
+            border-color: var(--clr-accent);
+        }
+
+        .cs-input::placeholder {
+            color: var(--clr-text-muted);
+        }
+
+        .cs-btn {
+            padding: 0.875rem 1.5rem;
+            background: var(--clr-accent);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.2s;
+            white-space: nowrap;
+        }
+
+        .cs-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px var(--clr-accent-glow);
+        }
+
+        .cs-fine {
+            font-size: 0.8125rem;
+            color: var(--clr-text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .cs-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--clr-text-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .cs-back:hover {
+            color: var(--clr-text);
+        }
+
+        .cs-back svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Equalizer bars animation */
+        .cs-equalizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 32px;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .cs-equalizer__bar {
+            width: 4px;
+            background: var(--clr-accent);
+            border-radius: 2px;
+            animation: eqBounce 1.2s ease-in-out infinite;
+        }
+
+        .cs-equalizer__bar:nth-child(1) { height: 40%; animation-delay: 0s; }
+        .cs-equalizer__bar:nth-child(2) { height: 70%; animation-delay: 0.15s; }
+        .cs-equalizer__bar:nth-child(3) { height: 55%; animation-delay: 0.3s; }
+        .cs-equalizer__bar:nth-child(4) { height: 85%; animation-delay: 0.1s; }
+        .cs-equalizer__bar:nth-child(5) { height: 45%; animation-delay: 0.25s; }
+        .cs-equalizer__bar:nth-child(6) { height: 65%; animation-delay: 0.05s; }
+        .cs-equalizer__bar:nth-child(7) { height: 50%; animation-delay: 0.2s; }
+
+        @keyframes eqBounce {
+            0%, 100% { transform: scaleY(0.4); }
+            50% { transform: scaleY(1); }
+        }
+
+        /* Mobile */
+        @media (max-width: 500px) {
+            .cs-form {
+                flex-direction: column;
+            }
+
+            .cs-btn {
+                width: 100%;
+            }
+
+            .cs-orb--1 { width: 180px; height: 180px; }
+            .cs-orb--2 { width: 150px; height: 150px; }
+            .cs-orb--3 { width: 120px; height: 120px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cs-bg">
+        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1200&h=800&fit=crop&q=60" alt="" aria-hidden="true">
+        <div class="cs-bg__overlay"></div>
+    </div>
+
+    <div class="cs-orb cs-orb--1" aria-hidden="true"></div>
+    <div class="cs-orb cs-orb--2" aria-hidden="true"></div>
+    <div class="cs-orb cs-orb--3" aria-hidden="true"></div>
+
+    <main class="cs-content">
+        <a href="/" class="cs-logo">
+            <span class="cs-logo__icon">PC</span>
+            <span class="cs-logo__text">PartyConcerts</span>
+        </a>
+
+        <div class="cs-equalizer" aria-hidden="true">
+            <div class="cs-equalizer__bar"></div>
+            <div class="cs-equalizer__bar"></div>
+            <div class="cs-equalizer__bar"></div>
+            <div class="cs-equalizer__bar"></div>
+            <div class="cs-equalizer__bar"></div>
+            <div class="cs-equalizer__bar"></div>
+            <div class="cs-equalizer__bar"></div>
+        </div>
+
+        <div class="cs-badge">Coming Soon</div>
+
+        <h1 class="cs-title">This Page Is <span>Warming Up</span></h1>
+
+        <p class="cs-desc">We're building something massive. Party Index™ rankings, vibe-based concert discovery, crew builder, afterparty maps — the ultimate concert party culture platform.</p>
+
+        <div class="cs-ref" id="csRef"></div>
+
+        <form class="cs-form" action="#" method="post">
+            <input type="email" class="cs-input" placeholder="your@email.com" aria-label="Email address" required>
+            <button type="submit" class="cs-btn">Notify Me</button>
+        </form>
+
+        <p class="cs-fine">Be the first to know when this drops.</p>
+
+        <a href="/" class="cs-back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Back to PartyConcerts
+        </a>
+    </main>
+
+    <script>
+        // Show the page reference
+        (function() {
+            var params = new URLSearchParams(window.location.search);
+            var ref = params.get('ref');
+            var el = document.getElementById('csRef');
+            if (ref && el) {
+                var labels = {
+                    'party-index': 'Party Index™ Rankings',
+                    'by-vibe': 'Concerts by Vibe',
+                    'crew-builder': 'Crew Builder',
+                    'cities': 'Party Cities',
+                    'afterparty-map': 'Afterparty Maps',
+                    'artists': 'Artist Pages',
+                    'concerts': 'Upcoming Concerts',
+                    'solo-guide': 'Solo-Friendly Guide',
+                    'no-tickets': 'No-Tickets Playbook',
+                    'legendary-nights': 'Legendary Nights Archive',
+                    'travel': 'Concert Travel',
+                    'merch': 'Merch Store',
+                    'about': 'About PartyConcerts',
+                    'faq': 'FAQ',
+                    'legal': 'Legal',
+                    'contact': 'Contact',
+                    'safety': 'Safety Guides',
+                    'archetypes-quiz': 'Archetype Quiz',
+                    'start-here': 'Start Here'
+                };
+                var parts = ref.split('-');
+                var label = labels[ref];
+                if (!label) {
+                    // Try to generate a nice label
+                    label = ref.replace(/^(party-index|city|vibe|legendary)-?/, function(m) {
+                        return '';
+                    });
+                    label = label.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+                    if (!label) label = ref;
+                }
+                el.textContent = 'Page: ' + label;
+                el.style.display = 'inline-block';
+            } else if (el) {
+                el.style.display = 'none';
+            }
+        })();
+    </script>
+</body>
+</html>
